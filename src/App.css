@@ -1,0 +1,20 @@
+.App {
+  padding: 30px;
+  display: flex;
+}
+.App > div {
+  margin-right: 50px;
+}
+.is-done {
+  opacity: 0.4;
+}
+.selected {
+  background-color: lightskyblue;
+}
+.error {
+  border: 2px solid red;
+  outline: transparent;
+}
+.error-message {
+  color: red;
+}
