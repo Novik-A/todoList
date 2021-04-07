@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {FilterValuesType, TaskType} from './App';
+import {FilterValuesType, TaskType} from './AppWithRedux';
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
@@ -16,7 +16,7 @@ type TodoListPropsType = {
     removeTask: (taskID: string, todoListID: string) => void
     removeTodoList: (todoListID: string) => void
     addTask: (title: string, todoListID: string) => void
-    changeTodoListFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
+    changeTodoListFilter: (todoListID: string, newFilterValue: FilterValuesType) => void
     changeTodoListTitle: (newTitle: string, todoListID: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
     changeTaskTitle: (taskID: string, newTitle: string, todoListID: string) => void
@@ -26,9 +26,9 @@ export function TodoList(props: TodoListPropsType) {
 
     const addTask = (title: string) => props.addTask(title, props.todoListID)
     const removeTodoList = () => props.removeTodoList(props.todoListID)
-    const setAllFilter = () => props.changeTodoListFilter('all', props.todoListID)
-    const setActiveFilter = () => props.changeTodoListFilter('active', props.todoListID)
-    const setCompletedFilter = () => props.changeTodoListFilter('completed', props.todoListID)
+    const setAllFilter = () => props.changeTodoListFilter(props.todoListID, 'all')
+    const setActiveFilter = () => props.changeTodoListFilter(props.todoListID, 'active')
+    const setCompletedFilter = () => props.changeTodoListFilter(props.todoListID, 'completed')
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListID)
     const tasks = props.tasks.map(t => {
         const removeTask = () => {
