@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState, useCallback} from "react";
 import {FilterValuesType, TaskType} from './AppWithRedux';
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
@@ -24,13 +24,20 @@ type TodoListPropsType = {
 
 export function TodoList(props: TodoListPropsType) {
 
-    const addTask = (title: string) => props.addTask(title, props.todoListID)
+    const addTask = useCallback((title: string) => props.addTask(title, props.todoListID), [])
     const removeTodoList = () => props.removeTodoList(props.todoListID)
-    const setAllFilter = () => props.changeTodoListFilter(props.todoListID, 'all')
-    const setActiveFilter = () => props.changeTodoListFilter(props.todoListID, 'active')
-    const setCompletedFilter = () => props.changeTodoListFilter(props.todoListID, 'completed')
+    const setAllFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'all'), [])
+    const setActiveFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'active'), [])
+    const setCompletedFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'completed'), [])
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListID)
-    const tasks = props.tasks.map(t => {
+    let tasksForTodoList = props.tasks
+    if (props.filter === 'active') {
+        tasksForTodoList = props.tasks.filter(t => t.isDone === false)
+    }
+    if (props.filter === 'completed') {
+        tasksForTodoList = props.tasks.filter(t => t.isDone === true)
+    }
+    const tasks = tasksForTodoList.map(t => {
         const removeTask = () => {
             props.removeTask(t.id, props.todoListID)
         }
