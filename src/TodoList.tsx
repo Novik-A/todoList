@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {FilterValuesType, TaskType} from './AppWithRedux';
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
@@ -43,16 +43,11 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
     if (props.filter === 'completed') {
         tasksForTodoList = props.tasks.filter(t => t.isDone === true)
     }
-    const tasks = tasksForTodoList.map(t => {
-        return <Task
-            removeTask={props.removeTask}
-            changeTaskStatus={props.changeTaskStatus}
-            changeTaskTitle={props.changeTaskTitle}
-            task={t}
-            todoListID={props.todoListID}
-            key={t.id}
-            />
-    })
+        const removeTask = useCallback((taskID: string) => props.removeTask(taskID, props.todoListID), [props.removeTask, props.todoListID])
+        const changeTaskStatus = useCallback((taskID: string, isDone: boolean) =>
+            props.changeTaskStatus(taskID, isDone, props.todoListID), [props.changeTaskStatus, props.todoListID])
+        const changeTaskTitle = useCallback((taskID: string, newTitle: string) =>
+            props.changeTaskTitle(taskID, newTitle, props.todoListID), [props.changeTaskTitle, props.todoListID])
 
     return (
         <div>
@@ -65,7 +60,17 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
             </h3>
             <AddItemForm addItem={addTask}/>
             <div style={{listStyle: "none", paddingLeft: "0"}}>
-                {tasks}
+                {
+                    tasksForTodoList.map(t => {
+                    return <Task
+                        removeTask={removeTask}
+                        changeTaskStatus={changeTaskStatus}
+                        changeTaskTitle={changeTaskTitle}
+                        task={t}
+                        key={t.id}
+                    />
+                })
+                }
             </div>
             <div style={{marginTop: "5px"}}>
                 <Button variant={"contained"}

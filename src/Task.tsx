@@ -5,21 +5,20 @@ import {Delete} from "@material-ui/icons";
 import {TaskType} from "./AppWithRedux";
 
 type TaskPropsType = {
-    removeTask: (taskID: string, todoListID: string) => void
-    changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
-    changeTaskTitle: (taskID: string, newTitle: string, todoListID: string) => void
+    removeTask: (taskID: string) => void
+    changeTaskStatus: (taskID: string, isDone: boolean) => void
+    changeTaskTitle: (taskID: string, newTitle: string) => void
     task: TaskType
-    todoListID: string
     key: string
 }
 export const Task = React.memo((props: TaskPropsType) => {
     const removeTask = () => {
-        props.removeTask(props.task.id, props.todoListID)
+        props.removeTask(props.task.id)
     }
     const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
-        props.changeTaskStatus(props.task.id, e.currentTarget.checked, props.todoListID)
-    const changeTaskTitle = useCallback((newTitle: string) =>
-        props.changeTaskTitle(props.task.id, newTitle, props.todoListID), [props.changeTaskTitle, props.task.id, props.todoListID])
+        props.changeTaskStatus(props.task.id, e.currentTarget.checked)
+    const changeTaskTitle = (newTitle: string) =>
+        props.changeTaskTitle(props.task.id, newTitle)
     return (
         <div className={props.task.isDone ? 'is-done' : ''}>
             <Checkbox
