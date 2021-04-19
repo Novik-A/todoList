@@ -1,10 +1,11 @@
-import React, {ChangeEvent, KeyboardEvent, useState, useCallback} from "react";
+import React, {useCallback} from "react";
 import {FilterValuesType, TaskType} from './AppWithRedux';
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, Checkbox, IconButton, TextField} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import {Task} from "./Task";
 
 
 type TodoListPropsType = {
@@ -22,14 +23,19 @@ type TodoListPropsType = {
     changeTaskTitle: (taskID: string, newTitle: string, todoListID: string) => void
 }
 
-export function TodoList(props: TodoListPropsType) {
-
-    const addTask = useCallback((title: string) => props.addTask(title, props.todoListID), [])
+export const TodoList = React.memo((props: TodoListPropsType) => {
+    console.log('TodoList')
+    const addTask = useCallback((title: string) =>
+        props.addTask(title, props.todoListID), [props.addTask, props.todoListID])
     const removeTodoList = () => props.removeTodoList(props.todoListID)
-    const setAllFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'all'), [])
-    const setActiveFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'active'), [])
-    const setCompletedFilter = useCallback(() => props.changeTodoListFilter(props.todoListID, 'completed'), [])
-    const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListID)
+    const setAllFilter = useCallback(() =>
+        props.changeTodoListFilter(props.todoListID, 'all'), [props.changeTodoListFilter,props.todoListID])
+    const setActiveFilter = useCallback(() =>
+        props.changeTodoListFilter(props.todoListID, 'active'), [props.changeTodoListFilter,props.todoListID])
+    const setCompletedFilter = useCallback(() =>
+        props.changeTodoListFilter(props.todoListID, 'completed'), [props.changeTodoListFilter,props.todoListID])
+    const changeTodoListTitle = useCallback((title: string) =>
+        props.changeTodoListTitle(title, props.todoListID), [props.changeTodoListTitle, props.todoListID])
     let tasksForTodoList = props.tasks
     if (props.filter === 'active') {
         tasksForTodoList = props.tasks.filter(t => t.isDone === false)
@@ -38,27 +44,14 @@ export function TodoList(props: TodoListPropsType) {
         tasksForTodoList = props.tasks.filter(t => t.isDone === true)
     }
     const tasks = tasksForTodoList.map(t => {
-        const removeTask = () => {
-            props.removeTask(t.id, props.todoListID)
-        }
-        const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
-            props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoListID)
-        const changeTaskTitle = (newTitle: string) =>
-            props.changeTaskTitle(t.id, newTitle, props.todoListID)
-        return (
-            <div key={t.id} className={t.isDone ? 'is-done' : ''}>
-                <Checkbox
-                    color={"primary"}
-                    checked={t.isDone}
-                    onChange={changeTaskStatus}
-                    />
-                <EditableSpan title={t.title} changeTitle={changeTaskTitle}/>
-
-                <IconButton onClick={removeTask}>
-                    <Delete/>
-                </IconButton>
-            </div>
-        )
+        <Task
+            removeTask={props.removeTask}
+            changeTaskStatus={props.changeTaskStatus}
+            changeTaskTitle={props.changeTaskTitle}
+            task={t}
+            todoListID={props.todoListID}
+            key={t.id}
+            />
     })
 
     return (
@@ -93,3 +86,5 @@ export function TodoList(props: TodoListPropsType) {
         </div>
     );
 }
+)
+
