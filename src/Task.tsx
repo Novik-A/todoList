@@ -10,6 +10,7 @@ type TaskPropsType = {
     changeTaskTitle: (taskID: string, newTitle: string, todoListID: string) => void
     task: TaskType
     todoListID: string
+    key: string
 }
 export const Task = React.memo((props: TaskPropsType) => {
     const removeTask = () => {
@@ -20,7 +21,7 @@ export const Task = React.memo((props: TaskPropsType) => {
     const changeTaskTitle = useCallback((newTitle: string) =>
         props.changeTaskTitle(props.task.id, newTitle, props.todoListID), [props.changeTaskTitle, props.task.id, props.todoListID])
     return (
-        <div key={props.task.id} className={props.task.isDone ? 'is-done' : ''}>
+        <div className={props.task.isDone ? 'is-done' : ''}>
             <Checkbox
                 color={"primary"}
                 checked={props.task.isDone}
