@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {todolistAPI} from "../api/todolists-api";
+import {todolistsAPI} from "../api/todolists-api";
 
 export default {
     title: 'API'
@@ -8,7 +8,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.getTodo()
+        todolistsAPI.getTodo()
             .then((res) => {
                 setState(res.data);
             })
@@ -19,7 +19,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.createTodo('ReactTTTTT')
+        todolistsAPI.createTodo('ReactTTTTT')
             .then( (res) => {
             setState(res.data);
         })
@@ -31,7 +31,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [todolistId, setTodolistId] = useState<string>('')
     const deleteTodo = () => {
-        todolistAPI.deleteTodo(todolistId)
+        todolistsAPI.deleteTodo(todolistId)
             .then( (res) => {
             setState(res.data);
         })
@@ -51,7 +51,7 @@ export const UpdateTodolistTitle = () => {
     const [title, setTitle] = useState<string>('')
     const [todolistId, setTodolistId] = useState<string>('')
     const updateTodoTitle = () => {
-        todolistAPI.updateTodoTitle(todolistId, title)
+        todolistsAPI.updateTodoTitle(todolistId, title)
         .then((res) => {
                 setState(res.data)
             })
@@ -73,7 +73,7 @@ export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
     const [todolistId, setTodolistId] = useState<string>('')
     const getTasks = () => {
-            todolistAPI.getTasks(todolistId)
+            todolistsAPI.getTasks(todolistId)
             .then((res) => {
                 console.log(res)
                 setState(res.data);
@@ -94,7 +94,7 @@ export const CreateTask = () => {
     const [title, setTitle] = useState<string>('')
     const [todolistId, setTodolistId] = useState<string>('')
     const createTask = () => {
-        todolistAPI.createTask(todolistId, title)
+        todolistsAPI.createTask(todolistId, title)
             .then( (res) => {
                 console.log(res)
                 setState(res.data);
@@ -118,7 +118,7 @@ export const DeleteTask = () => {
     const [taskId, setTaskId] = useState<string>('')
     const [todolistId, setTodolistId] = useState<string>('')
     const deleteTask = () => {
-        todolistAPI.deleteTask(todolistId, taskId)
+        todolistsAPI.deleteTask(todolistId, taskId)
             .then( (res) => {
                 setState(res.data);
             })
@@ -148,7 +148,7 @@ export const UpdateTask = () => {
     const deadline = ''
 
     const updateTask = () => {
-        todolistAPI.updateTask(todolistId, taskId, {title, description, status, priority, startDate, deadline})
+        todolistsAPI.updateTask(todolistId, taskId, {title, description, status, priority, startDate, deadline})
             .then((res) => {
                 setState(res.data)
             })
