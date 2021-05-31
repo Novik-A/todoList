@@ -1,26 +1,19 @@
-import React, {useCallback, useEffect, useReducer, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from "./TodoList";
-import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {Button, AppBar, Typography, IconButton, Toolbar, Container, Grid, Paper} from "@material-ui/core";
-import { Menu } from '@material-ui/icons';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from '@material-ui/icons';
 import {
-    AddTodoListAC, addTodosTC,
-    ChangeTodoListFilterAC,
-    ChangeTodoListTitleAC, FilterValuesType,
-    RemoveTodoListAC, removeTodosTC, setTodosTC,
+    addTodosTC,
+    changeTodoListFilterAC,
+    FilterValuesType,
+    removeTodosTC,
+    setTodosTC,
     TodolistDomainType,
-    todoListsReducer, updateTodosTC
+    updateTodosTC
 } from "./store/todolists-reducer";
-import {
-    addTaskAC, addTaskTC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
-    removeTaskAC,
-    removeTaskTC,
-    tasksReducer, updateTaskStatusTC, updateTaskTitleTC
-} from "./store/tasks-reducer";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "./store/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store/store";
 import {TaskStatuses, TaskType} from "./api/todolists-api";
@@ -48,15 +41,15 @@ function AppWithRedux() {
     }, [dispatch])
 
     const changeTaskStatus = useCallback((taskId: string, status: TaskStatuses, todoListId: string) => {
-        dispatch(updateTaskStatusTC (taskId, todoListId, status))
+        dispatch(updateTaskTC (taskId, todoListId, {status}))
     }, [dispatch])
 
     const changeTaskTitle = useCallback((taskId: string, newTitle: string, todoListId: string) => {
-        dispatch(updateTaskTitleTC(taskId, todoListId, newTitle))
+        dispatch(updateTaskTC(taskId, todoListId, {title: newTitle}))
     }, [dispatch])
 
     const changeTodoListFilter = useCallback((todoListId: string, newFilterValue: FilterValuesType) => {
-        let action = ChangeTodoListFilterAC(todoListId, newFilterValue)
+        let action = changeTodoListFilterAC(todoListId, newFilterValue)
         dispatch(action)
     }, [dispatch])
 

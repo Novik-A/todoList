@@ -53,11 +53,11 @@ type GetTasksResponseType = {
 
 type UpdateTaskType = {
     title: string
-    description: string | null
+    description: string
     status: number
     priority: number
-    startDate: string | null
-    deadline: string | null
+    startDate: string
+    deadline: string
 }
 
 export const todolistsAPI = {
