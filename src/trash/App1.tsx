@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './App.css';
-import {TodoList} from "./TodoList";
+import '../app/App.css';
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {Button, AppBar, Typography, IconButton, Toolbar, Container, Grid, Paper} from "@material-ui/core";
 import { Menu } from '@material-ui/icons';
 
@@ -21,7 +21,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+function App1() {
     const todoList_1 = v1()
     const todoList_2 = v1()
     const [todoLists, setTodolists] = useState<Array<TodoListType>>([
@@ -112,7 +112,7 @@ function App() {
         return (
             <Grid item key={tl.id}>
             <Paper elevation={10} style={{padding: "10px"}}>
-                {/*<TodoList*/}
+                {/*<Todolist*/}
                 {/*    key={tl.id}*/}
                 {/*    todoListID={tl.id}*/}
                 {/*    title={tl.title}*/}
@@ -156,5 +156,5 @@ function App() {
     );
 }
 
-export default App;
+export default App1;
 

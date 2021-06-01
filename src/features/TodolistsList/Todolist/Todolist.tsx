@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect} from "react";
-import './App.css';
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import '../../../app/App.css';
+import {AddItemForm} from "../../../components/AddItemForm/AddItemForm";
+import {EditableSpan} from "../../../components/EditableSpan/EditableSpan";
 import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
-import {Task} from "./Task";
-import {TaskStatuses, TaskType} from "./api/todolists-api";
-import {FilterValuesType} from "./store/todolists-reducer";
+import {Task} from "./Task/Task";
+import {TaskStatuses, TaskType} from "../../../api/todolists-api";
+import {FilterValuesType} from "../todolists-reducer";
 import {useDispatch} from "react-redux";
-import {fetchTasksTC} from "./store/tasks-reducer";
+import {fetchTasksTC} from "../tasks-reducer";
 
 
 type TodoListPropsType = {
@@ -25,8 +25,8 @@ type TodoListPropsType = {
     changeTaskTitle: (taskId: string, newTitle: string, todoListId: string) => void
 }
 
-export const TodoList = React.memo((props: TodoListPropsType) => {
-    console.log('TodoList')
+export const Todolist = React.memo((props: TodoListPropsType) => {
+    console.log('Todolist')
 
     const dispatch = useDispatch()
 
