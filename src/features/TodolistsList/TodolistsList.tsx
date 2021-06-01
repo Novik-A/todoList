@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect} from "react";
 import {
     addTodosTC,
-    changeTodoListFilterAC,
+    changeTodolistFilterAC,
     FilterValuesType,
     removeTodosTC,
-    setTodosTC,
+    fetchTodosTC,
     TodolistDomainType,
     updateTodosTC
 } from "./todolists-reducer";
@@ -18,7 +18,7 @@ import {Todolist} from "./Todolist/Todolist";
 
 export const TodolistsList: React.FC = () => {
     useEffect(() => {
-        dispatch(setTodosTC())
+        dispatch(fetchTodosTC())
     }, [])
 
     let todoLists = useSelector<AppRootStateType, TodolistDomainType[]>(state => state.todoLists)
@@ -42,7 +42,7 @@ export const TodolistsList: React.FC = () => {
     }, [dispatch])
 
     const changeTodoListFilter = useCallback((todoListId: string, newFilterValue: FilterValuesType) => {
-        let action = changeTodoListFilterAC(todoListId, newFilterValue)
+        let action = changeTodolistFilterAC(todoListId, newFilterValue)
         dispatch(action)
     }, [dispatch])
 
@@ -72,6 +72,7 @@ export const TodolistsList: React.FC = () => {
                                 key={tl.id}
                                 todoListId={tl.id}
                                 title={tl.title}
+                                entityStatus={tl.entityStatus}
                                 tasks={tasks[tl.id]}
                                 removeTask={removeTask}
                                 removeTodoList={removeTodoList}
