@@ -5,11 +5,13 @@ import {tasksReducer} from '../features/TodolistsList/tasks-reducer'
 import {todoListsReducer} from '../features/TodolistsList/todolists-reducer'
 import {AppRootStateType} from "./store";
 import thunk from "redux-thunk";
+import {appReducer} from "./app-reducer";
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todoListsReducer
+    todoLists: todoListsReducer,
+    app: appReducer
 })
 
 const initialGlobalState = {};

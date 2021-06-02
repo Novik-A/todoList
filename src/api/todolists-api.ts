@@ -82,7 +82,7 @@ type GetTasksResponseType = {
     totalCount: number
     error: string | null
 }
-type UpdateTaskType = {
+export type UpdateTaskType = {
     title: string
     description: string
     status: number

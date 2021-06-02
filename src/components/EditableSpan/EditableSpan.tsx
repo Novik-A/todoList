@@ -1,9 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {TextField} from "@material-ui/core";
+import {RequestStatusType} from "../../app/app-reducer";
 
 export type EditableSpanPropsType = {
     title: string
     changeTitle: (newTitle: string) => void
+    entityStatus?: RequestStatusType
 }
 
 export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
@@ -30,6 +32,7 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
                 onChange={changeTitle}
                 onBlur={offEditMode}
                 onKeyPress={onKeyPressHandler}
+                disabled={props.entityStatus === 'loading'}
                 autoFocus
             />
         : <span onDoubleClick={onEditMode}>{props.title}</span>

@@ -19,14 +19,16 @@ beforeEach(() => {
             title: "What to learn",
             order: 1,
             addedDate: '',
-            filter: "all"
+            filter: "all",
+            entityStatus: "idle"
         },
         {
             id: todolistId2,
             title: "What to buy",
             order: 1,
             addedDate: '',
-            filter: "all"
+            filter: "all",
+            entityStatus: "idle"
         }
     ]
 })
@@ -40,12 +42,19 @@ test('correct todolist should be removed', () => {
 
 test('correct todolist should be added', () => {
 
-    let newTodolistTitle = "New Todolist";
+    const newTodolist = {
+        id: v1(),
+        title: "New Todolist",
+        order: 1,
+        addedDate: '',
+        filter: "all",
+        entityStatus: "idle"
+    }
 
-    const endState = todoListsReducer(startState, addTodoListAC(newTodolistTitle))
+    const endState = todoListsReducer(startState, addTodoListAC(newTodolist))
 
     expect(endState.length).toBe(3);
-    expect(endState[0].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe(newTodolist.title);
 });
 
 test('correct todolist should change its name', () => {

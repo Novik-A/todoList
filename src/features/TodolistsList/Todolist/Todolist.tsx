@@ -37,18 +37,14 @@ export const Todolist = React.memo((props: TodoListPropsType) => {
     const addTask = useCallback((title: string) =>
         props.addTask(title, props.todoListId), [props.addTask, props.todoListId])
     const removeTodoList = () => props.removeTodoList(props.todoListId)
-    const setAllFilter = useCallback(() =>
-        props.changeTodoListFilter(props.todoListId, 'all'), [props.changeTodoListFilter,props.todoListId])
-    const setActiveFilter = useCallback(() =>
-        props.changeTodoListFilter(props.todoListId, 'active'), [props.changeTodoListFilter,props.todoListId])
-    const setCompletedFilter = useCallback(() =>
-        props.changeTodoListFilter(props.todoListId, 'completed'), [props.changeTodoListFilter,props.todoListId])
     const changeTodoListTitle = useCallback((title: string) =>
         props.changeTodoListTitle(title, props.todoListId), [props.changeTodoListTitle, props.todoListId])
-
-    const onAllClickHandler = useCallback(() => props.changeTodoListFilter( props.todoListId, 'all'), [props.todoListId, props.changeTodoListFilter])
-    const onActiveClickHandler = useCallback(() => props.changeTodoListFilter(props.todoListId, 'active'), [props.todoListId, props.changeTodoListFilter])
-    const onCompletedClickHandler = useCallback(() => props.changeTodoListFilter(props.todoListId, 'completed'), [props.todoListId, props.changeTodoListFilter])
+    const onAllClickHandler = useCallback(() =>
+        props.changeTodoListFilter( props.todoListId, 'all'), [props.todoListId, props.changeTodoListFilter])
+    const onActiveClickHandler = useCallback(() =>
+        props.changeTodoListFilter(props.todoListId, 'active'), [props.todoListId, props.changeTodoListFilter])
+    const onCompletedClickHandler = useCallback(() =>
+        props.changeTodoListFilter(props.todoListId, 'completed'), [props.todoListId, props.changeTodoListFilter])
 
 
     let tasksForTodoList = props.tasks
@@ -62,7 +58,7 @@ export const Todolist = React.memo((props: TodoListPropsType) => {
     return (
         <div>
             <h3>
-                <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
+                <EditableSpan title={props.title} changeTitle={changeTodoListTitle} entityStatus={props.entityStatus} />
 
                 <IconButton onClick={removeTodoList} disabled={props.entityStatus === 'loading'}>
                     <Delete/>
