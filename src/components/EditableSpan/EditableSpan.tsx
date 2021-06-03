@@ -5,10 +5,10 @@ import {RequestStatusType} from "../../app/app-reducer";
 export type EditableSpanPropsType = {
     title: string
     changeTitle: (newTitle: string) => void
-    entityStatus?: RequestStatusType
+    disabled?: boolean
 }
 
-export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
+export const EditableSpan = React.memo(({disabled = false, ...props}: EditableSpanPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [title, setTitle] = useState<string>(props.title)
 
@@ -32,7 +32,7 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
                 onChange={changeTitle}
                 onBlur={offEditMode}
                 onKeyPress={onKeyPressHandler}
-                disabled={props.entityStatus === 'loading'}
+                disabled={disabled}
                 autoFocus
             />
         : <span onDoubleClick={onEditMode}>{props.title}</span>

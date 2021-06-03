@@ -1,6 +1,5 @@
-import {addTaskAC, updateTaskAC, removeTaskAC, tasksReducer} from './tasks-reducer';
-import {TasksStateType} from '../../app/App';
-import {addTodoListAC, removeTodoListAC, TodolistDomainType, todoListsReducer} from "./todolists-reducer";
+import {addTaskAC, updateTaskAC, removeTaskAC, tasksReducer, TasksStateType} from './tasks-reducer';
+import {addTodolistAC, removeTodolistAC, TodolistDomainType, todoListsReducer} from "./todolists-reducer";
 import {TaskStatuses} from "../../api/todolists-api";
 
 let startState: TasksStateType
@@ -143,7 +142,12 @@ test('title of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodoListAC("new todolist");
+    const action = addTodolistAC({
+        id: 'todolistId3',
+        addedDate: '',
+        order: 0,
+        title: "new todolist"
+    });
 
     const endState = tasksReducer(startState, action)
 
@@ -162,7 +166,12 @@ test('ids should be equals', () => {
     const startTasksState: TasksStateType = {};
     const startTodolistsState: TodolistDomainType[] = [];
 
-    const action = addTodoListAC("new todolist");
+    const action = addTodolistAC({
+        id: 'todolistId3',
+        addedDate: '',
+        order: 0,
+        title: "new todolist"
+    });
 
     const endTasksState = tasksReducer(startTasksState, action)
     const endTodolistsState = todoListsReducer(startTodolistsState, action)
@@ -171,13 +180,13 @@ test('ids should be equals', () => {
     const idFromTasks = keys[0];
     const idFromTodolists = endTodolistsState[0].id;
 
-    expect(idFromTasks).toBe(action.todoListId);
-    expect(idFromTodolists).toBe(action.todoListId);
+    expect(idFromTasks).toBe(action.todolist.id);
+    expect(idFromTodolists).toBe(action.todolist.id);
 });
 
 test('property with todolistId should be deleted', () => {
 
-    const action = removeTodoListAC("todolistId2");
+    const action = removeTodolistAC("todolistId2");
 
     const endState = tasksReducer(startState, action)
 

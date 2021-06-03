@@ -26,8 +26,8 @@ export const todoListsReducer = (state: TodolistDomainType[] = initialState, act
     }
 }
 
-export const removeTodoListAC = (id: string) => ({ type: "REMOVE-TODOLIST", id } as const)
-export const addTodoListAC = (todolist: TodoType) => ({ type: "ADD-TODOLIST", todolist } as const)
+export const removeTodolistAC = (id: string) => ({ type: "REMOVE-TODOLIST", id } as const)
+export const addTodolistAC = (todolist: TodoType) => ({ type: "ADD-TODOLIST", todolist } as const)
 export const changeTodolistTitleAC = (id: string, title: string) => ({ type: "CHANGE-TODOLIST-TITLE", id, title } as const)
 export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => ({ type: "CHANGE-TODOLIST-FILTER", id, filter } as const)
 export const setTodosAC = (todos: Array<TodoType>) => ({ type: 'SET-TODOS', todos} as const)
@@ -54,7 +54,7 @@ export const removeTodosTC = (todolistId: string) => (dispatch: Dispatch<ActionT
     todolistsAPI.deleteTodo(todolistId)
         .then((res) => {
             if (res.data.resultCode === 0) {
-                dispatch(removeTodoListAC(todolistId))
+                dispatch(removeTodolistAC(todolistId))
                 dispatch(setAppStatusAC('succeeded'))
             } else {
                 handleServerAppError(dispatch, res.data)
@@ -69,7 +69,7 @@ export const addTodosTC = (title: string) => (dispatch: Dispatch<ActionType>) =>
     todolistsAPI.createTodo(title)
         .then((res) => {
             if (res.data.resultCode === 0) {
-                dispatch(addTodoListAC(res.data.data.item))
+                dispatch(addTodolistAC(res.data.data.item))
                 dispatch(setAppStatusAC('succeeded'))
             } else {
                 handleServerAppError(dispatch, res.data)
@@ -99,13 +99,13 @@ export const updateTodosTC = (todolistId: string, title: string) => (dispatch: D
 
 // types
 
-export type RemoveTodoListActionType = ReturnType<typeof removeTodoListAC>
-export type AddTodoListActionType = ReturnType<typeof addTodoListAC>
+export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
+export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type SetTodosActionType = ReturnType<typeof setTodosAC>
 
 type ActionType =
-    | RemoveTodoListActionType
-    | AddTodoListActionType
+    | RemoveTodolistActionType
+    | AddTodolistActionType
     | ReturnType<typeof changeTodolistTitleAC>
     | ReturnType<typeof changeTodolistFilterAC>
     | ReturnType<typeof changeTodolistEntityStatusAC>

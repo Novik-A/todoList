@@ -8,8 +8,11 @@ import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 
+type PropsType = {
+    demo?: boolean
+}
 
-function App() {
+function App({demo = false}: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
@@ -26,7 +29,7 @@ function App() {
             </AppBar>
             {status === 'loading' && <LinearProgress color="secondary"  />}
             <Container fixed>
-                <TodolistsList />
+                <TodolistsList demo={demo}/>
             </Container>
             <ErrorSnackbar />
         </div>

@@ -54,3 +54,20 @@ TaskIsNotDoneExample.args = {
         addedDate: ''
     }
 };
+
+export const TaskDisabledExample = Template.bind({});
+TaskDisabledExample.args = {
+    ...baseArgs,
+    task: {id: '1',
+        title: 'React',
+        description: '',
+        todoListId: '',
+        order: 0,
+        status: 0,
+        priority: 0,
+        startDate: '',
+        deadline: '',
+        addedDate: ''
+    },
+    disabled: true
+};

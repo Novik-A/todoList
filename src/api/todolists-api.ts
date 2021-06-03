@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {RequestStatusType} from "../app/app-reducer";
 
 
 const instance = axios.create({
@@ -76,6 +77,7 @@ export type TaskType = {
     startDate: string
     deadline: string
     addedDate: string
+    entityStatus?: RequestStatusType
 }
 type GetTasksResponseType = {
     items: Array<TaskType>
