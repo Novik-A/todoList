@@ -7,6 +7,8 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import {Login} from "../features/Login/Login";
+import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
 
 type PropsType = {
     demo?: boolean
@@ -24,14 +26,22 @@ function App({demo = false}: PropsType) {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">
+                        <NavLink to={'/login'}>Login</NavLink>
+                    </Button>
                 </Toolbar>
             </AppBar>
-            {status === 'loading' && <LinearProgress color="secondary"  />}
+            {status === 'loading' && <LinearProgress color="secondary"/>}
             <Container fixed>
-                <TodolistsList demo={demo}/>
+                <Switch>
+                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route path={'/login'} render={() => <Login/>}/>
+                    <Route path={'/404'} render={() =>
+                        <h1 style={{textAlign: 'center', fontSize: '80px'}}>404: PAGE NOT FOUND</h1>}/>
+                    <Redirect from={'*'} to={'/404'} />
+                </Switch>
             </Container>
-            <ErrorSnackbar />
+            <ErrorSnackbar/>
         </div>
     );
 }

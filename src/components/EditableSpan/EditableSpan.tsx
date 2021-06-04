@@ -35,7 +35,7 @@ export const EditableSpan = React.memo(({disabled = false, ...props}: EditableSp
                 disabled={disabled}
                 autoFocus
             />
-        : <span onDoubleClick={onEditMode}>{props.title}</span>
+        : <span style={{color: disabled ? 'grey' : 'black'}} onDoubleClick={onEditMode}>{props.title}</span>
     )
 }
 )
