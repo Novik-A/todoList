@@ -54,7 +54,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 }
 
 // actions
-
 export const removeTaskAC = (taskId: string, todolistId: string) => ({type: "REMOVE-TASK", taskId, todolistId} as const)
 export const addTaskAC = (task: TaskType) => ({type: "ADD-TASK", task} as const)
 export const updateTaskAC = (taskId: string, model: UpdateTaskModelType, todolistId: string) =>
@@ -64,7 +63,6 @@ export const changeTaskEntityStatusAC  = (todolistId: string, taskId: string, en
     ({ type: 'CHANGE-TASK-ENTITY-STATUS', todolistId, taskId, entityStatus} as const)
 
 // thunks
-
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getTasks(todolistId)
@@ -144,7 +142,6 @@ export const updateTaskTC = (taskId: string, todolistId: string, model: UpdateTa
     }
 
 // types
-
 type UpdateTaskModelType = {
     title?: string
     description?: string

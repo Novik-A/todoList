@@ -26,6 +26,8 @@ export const todoListsReducer = (state: TodolistDomainType[] = initialState, act
     }
 }
 
+// actions
+
 export const removeTodolistAC = (id: string) => ({ type: "REMOVE-TODOLIST", id } as const)
 export const addTodolistAC = (todolist: TodoType) => ({ type: "ADD-TODOLIST", todolist } as const)
 export const changeTodolistTitleAC = (id: string, title: string) => ({ type: "CHANGE-TODOLIST-TITLE", id, title } as const)
@@ -33,7 +35,6 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => 
 export const setTodosAC = (todos: Array<TodoType>) => ({ type: 'SET-TODOS', todos} as const)
 export const changeTodolistEntityStatusAC  = (id: string, entityStatus: RequestStatusType) =>
     ({ type: 'CHANGE-TODOLIST-ENTITY-STATUS', id, entityStatus} as const)
-
 
 // thunks
 
