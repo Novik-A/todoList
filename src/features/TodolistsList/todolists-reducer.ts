@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {RequestStatusType, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../app/app-reducer";
 import {AxiosError} from "axios";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {SetIsLoggedInActionType} from "../Login/auth-reducer";
 
 
 const initialState: TodolistDomainType[] = []
@@ -21,6 +22,8 @@ export const todoListsReducer = (state: TodolistDomainType[] = initialState, act
             return state.map(tl => tl.id === action.id ? {...tl, filter: action.filter} : tl)
         case "CHANGE-TODOLIST-ENTITY-STATUS":
             return state.map(tl => tl.id === action.id ? {...tl, entityStatus: action.entityStatus} : tl)
+        case 'login/SET-IS-LOGGED-IN':
+            return action.value ? state : []
         default:
             return state
     }
@@ -113,6 +116,7 @@ type ActionType =
     | SetTodosActionType
     | SetAppStatusActionType
     | SetAppErrorActionType
+    | SetIsLoggedInActionType
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TodolistDomainType = TodoType & {

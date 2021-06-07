@@ -55,4 +55,5 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
 
 // types
 type InitialStateType = typeof initialState
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType
+export type SetIsLoggedInActionType = ReturnType<typeof setIsLoggedInAC>
+type ActionsType = SetIsLoggedInActionType | SetAppStatusActionType | SetAppErrorActionType
