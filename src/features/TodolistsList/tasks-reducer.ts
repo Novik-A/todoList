@@ -1,19 +1,8 @@
-import {
-    AddTodolistActionType,
-    changeTodolistEntityStatusAC,
-    RemoveTodolistActionType,
-    SetTodosActionType
-} from "./todolists-reducer";
+import {AddTodolistActionType, RemoveTodolistActionType, SetTodosActionType} from "./todolists-reducer";
 import {TaskType, todolistsAPI, UpdateTaskType} from "../../api/todolists-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../app/store";
-import {
-    RequestStatusType,
-    setAppErrorAC,
-    SetAppErrorActionType,
-    setAppStatusAC,
-    SetAppStatusActionType
-} from "../../app/app-reducer";
+import {RequestStatusType, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../app/app-reducer";
 import {AxiosError} from "axios";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 

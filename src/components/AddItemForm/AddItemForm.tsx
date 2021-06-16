@@ -1,7 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button, IconButton, TextField} from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
-import {RequestStatusType} from "../../app/app-reducer";
 
 export type AddItemFormPropsType = {
     addItem: (title: string) => void

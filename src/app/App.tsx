@@ -17,7 +17,7 @@ import {AppRootStateType} from "./store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Login} from "../features/Login/Login";
-import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import {logoutTC} from "../features/Login/auth-reducer";
 
 type PropsType = {

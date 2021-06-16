@@ -30,7 +30,6 @@ export const todoListsReducer = (state: TodolistDomainType[] = initialState, act
 }
 
 // actions
-
 export const removeTodolistAC = (id: string) => ({ type: "REMOVE-TODOLIST", id } as const)
 export const addTodolistAC = (todolist: TodoType) => ({ type: "ADD-TODOLIST", todolist } as const)
 export const changeTodolistTitleAC = (id: string, title: string) => ({ type: "CHANGE-TODOLIST-TITLE", id, title } as const)
@@ -40,7 +39,6 @@ export const changeTodolistEntityStatusAC  = (id: string, entityStatus: RequestS
     ({ type: 'CHANGE-TODOLIST-ENTITY-STATUS', id, entityStatus} as const)
 
 // thunks
-
 export const fetchTodosTC = () => (dispatch: Dispatch<ActionType>) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getTodo()
@@ -102,7 +100,6 @@ export const updateTodosTC = (todolistId: string, title: string) => (dispatch: D
 }
 
 // types
-
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type SetTodosActionType = ReturnType<typeof setTodosAC>
